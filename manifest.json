@@ -5,7 +5,8 @@
   "description": "Track HubSpot account.",
   "permissions": ["storage", "scripting", "tabs"],
   "background": {
-    "service_worker": "./src/background.js"
+    "service_worker": "./src/background.js",
+    "type": "module"
   },
   "content_scripts": [
     {

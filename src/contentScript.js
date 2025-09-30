@@ -27,7 +27,8 @@ function detectHubId() {
       portatId,
       portalName,
       url: location.href,
-      timestamp: Date.now()
+      timestamp: Date.now(),
+      eventDate: new Date().toLocaleString()
     });
   }
 }

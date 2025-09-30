@@ -1,4 +1,6 @@
 // background.js (module)
+import { config } from "./modules/config/enviroment.js";
+
 chrome.runtime.onStartup.addListener(() => {
   console.log("Start Extension");
 });
@@ -6,13 +8,15 @@ chrome.runtime.onStartup.addListener(() => {
 chrome.runtime.onMessage.addListener((msg, sender) => {
   if (msg.type === "hubspot_account_detected") {
     chrome.storage.local.get({ email: "" }, async (data) => {
+      const { email } = await data;
       const record = {
         ...msg,
-        email: data.email || null,
+        email: email || null,
       };
 
+      console.log(record);
       try {
-        const res = await fetch("http://localhost:4000/api/tracker", {
+        const res = await fetch(`${config.API_URL}/api/tracker`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -21,7 +25,8 @@ chrome.runtime.onMessage.addListener((msg, sender) => {
         });
 
         if (!res.ok) {
-          throw new Error(`Request failed with status ${res.status}`);
+          console.log(`Request failed with status ${res.status}`);
+          return;
         }
 
         const data = await res.json();
