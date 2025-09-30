@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>HubSpot Tracker</title>
+  <!-- Pico.css CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.5.10/css/pico.min.css" />
+  <link rel="stylesheet" href="./css/general.css" />
+</head>
+
+<body class="hubspot-tracker-extension">
+  <main class="container">
+    <h2>HubSpot Accounts</h2>
+
+    <form id="email-section">
+      <label for="email">Your Email</label>
+      <input type="email" id="email" placeholder="example@email.com" />
+      <button type="submit">Save</button>
+    </form>
+
+    <hr />
+
+    <div id="list"></div>
+
+  </main>
+  <script type="module" src="popup.js"></script>
+</body>
+
+</html>

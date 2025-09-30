@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "HubSpot Account Tracker",
+  "version": "0.1",
+  "description": "Track HubSpot account.",
+  "permissions": ["storage", "scripting", "tabs"],
+  "background": {
+    "service_worker": "./src/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://app.hubspot.com/*"],
+      "js": ["./src/contentScript.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "./src/images/hubSpot.png",
+    "48": "./src/images/hubSpot.png",
+    "128": "./src/images/hubSpot.png"
+  },
+  "action": {
+    "default_popup": "./src/popup.html",
+    "default_title": "HubSpot Account Tracker"
+  }
+}

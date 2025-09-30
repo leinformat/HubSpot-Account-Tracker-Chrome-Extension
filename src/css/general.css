@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+:root{
+    /* COLORS */
+    --primary: #F66129;
+    --secondary: #FFA07A;
+    --tertiary: #FF6B6B;
+    --blue:#4B0082;
+    --blue2:#6d0bb3;
+    --green:#6B8E23;
+    --yellow:#FFD700;
+    --white: #F4F4F4;
+    --black: #000;
+    --body: #0e101a;
+    --error: #FF3333;
+    --alert: #FF0F0F;
+    --white-light: #FFFFFF;
+    /* FONTS */
+    --baseFontSize: 14px;
+
+    /* LAYOUT */
+    --width:600px;
+    --height:250px;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+.hubspot-tracker-extension{
+    min-width: var(--width);
+    min-height: var(--height);
+    padding: 20px;
+}
+/* Scroll */
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+::-webkit-scrollbar:vertical {
+    width:12px;
+}
+::-webkit-scrollbar-button:increment {
+    display: none;
+} 
+::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background-color:var(--blue);
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+    cursor: pointer;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color:var(--blue2);
+}
+::-webkit-scrollbar-track {
+    border-radius: 10px;  
+}
