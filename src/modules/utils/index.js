@@ -1,6 +1,5 @@
 import { config } from "../config/enviroment.js";
 
-console.log(config);
 export const formatDate = timestamp => {
   const d = new Date(timestamp);
   return d.toLocaleString();

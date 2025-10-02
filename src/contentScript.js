@@ -1,36 +1,42 @@
 // contentScript.js
 function getHubIdFromUrl(url = location.href) {
   try {
-    let portalName = '';
-    const accountBtn = document.querySelector("#hs-global-toolbar-accounts > span");
-    if(accountBtn) portalName = accountBtn.textContent.trim();
-
     const u = new URL(url);
     const parts = u.pathname.split("/").filter(Boolean);
     if (parts.length >= 2) {
       const hubIdCandidate = parts[1];
+
       if (/^\d+$/.test(hubIdCandidate)) {
-        return { portatId:hubIdCandidate,portalName };
+        let portalName = '';
+        const accountBtn = document.querySelector("#hs-global-toolbar-accounts > span");
+        if(accountBtn) portalName = accountBtn.textContent.trim();
+
+        return { portalId:hubIdCandidate,portalName };
       }
     }
+    throw new Error("Invalid URL");
   } catch (e) {
-    console.error("Invalid URL", e);
+    console.log("Invalid URL", e);
+    return { portalId:'',portalName:'' };
   }
-  return null;
 }
 
 function detectHubId() {
-  const {portatId,portalName} = getHubIdFromUrl();
-  if (portatId) {
-    chrome.runtime.sendMessage({
-      type: "hubspot_account_detected",
-      portatId,
-      portalName,
-      url: location.href,
-      timestamp: Date.now(),
-      eventDate: new Date().toLocaleString()
-    });
-  }
+  window.addEventListener("load", (e) => {
+    setTimeout(() => {
+      const { portalId, portalName } = getHubIdFromUrl();
+      if (portalId) {
+        chrome.runtime.sendMessage({
+          type: "hubspot_account_detected",
+          portalId,
+          portalName,
+          url: location.href,
+          timestamp: Date.now(),
+          eventDate: new Date().toLocaleString(),
+        });
+      }
+    }, 2000);
+  });
 }
 
 detectHubId();
